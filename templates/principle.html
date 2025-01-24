@@ -7,21 +7,32 @@
     <style>
         body { font-family: Arial, sans-serif; line-height: 1.6; margin: 20px; }
         .principle { border: 1px solid #ddd; padding: 15px; border-radius: 5px; }
-        .category { font-size: 0.9em; color: #555; }
-        .title { font-weight: bold; font-size: 1.2em; }
-        .description { margin-top: 5px; }
+        .category { font-size: 0.9em; color: #555; margin-bottom: 10px; }
+        .title { font-weight: bold; font-size: 1.4em; margin-bottom: 10px; }
+        .description { margin-top: 10px; }
+        .navigation { margin-top: 20px; }
+        .navigation a { margin-right: 15px; text-decoration: none; color: blue; }
+        .navigation a.disabled { color: gray; pointer-events: none; text-decoration: none; }
     </style>
 </head>
 <body>
     <h1>Principle</h1>
     <div class="principle">
-        <div class="category">{{.Category}}</div>
+        <div class="category">Category: {{.Category}}</div>
         <div class="title">{{.Title}}</div>
         <div class="description">{{.Description}}</div>
     </div>
-    <div>
-        <a href="/?id=1">First Principle</a> |
-        <a href="/">Default Principle</a>
+    <div class="navigation">
+        {{if ne .PrevID 0}}
+            <a href="/?id={{.PrevID}}">Previous</a>
+        {{else}}
+            <a class="disabled">Previous</a>
+        {{end}}
+        {{if ne .NextID 0}}
+            <a href="/?id={{.NextID}}">Next</a>
+        {{else}}
+            <a class="disabled">Next</a>
+        {{end}}
     </div>
 </body>
 </html>
