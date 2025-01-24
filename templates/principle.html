@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Principle</title>
+    <style>
+        body { font-family: Arial, sans-serif; line-height: 1.6; margin: 20px; }
+        .principle { border: 1px solid #ddd; padding: 15px; border-radius: 5px; }
+        .category { font-size: 0.9em; color: #555; }
+        .title { font-weight: bold; font-size: 1.2em; }
+        .description { margin-top: 5px; }
+    </style>
+</head>
+<body>
+    <h1>Principle</h1>
+    <div class="principle">
+        <div class="category">{{.Category}}</div>
+        <div class="title">{{.Title}}</div>
+        <div class="description">{{.Description}}</div>
+    </div>
+    <div>
+        <a href="/?id=1">First Principle</a> |
+        <a href="/">Default Principle</a>
+    </div>
+</body>
+</html>
