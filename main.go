@@ -84,6 +84,6 @@ func main() {
 	})
 
 	// Start the HTTP server
-	log.Println("Server running at http://localhost:8080/")
-	log.Fatal(http.ListenAndServe(":8080", nil))
+	log.Println("Server running at http://localhost:5001/")
+	log.Fatal(http.ListenAndServe(":5001", nil))
 }

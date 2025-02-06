@@ -1,0 +1,27 @@
+version: '3'
+
+entryPoints:
+  web:
+    address: :9080
+
+services:
+  reverse-proxy:
+    image: traefik:v3.3
+    command:
+      - "--api.insecure=true"
+      - "--providers.docker=true"
+      - "--entrypoints.web.address=:9080"
+    ports:
+      - "8080:8080"
+      - "9080:9080"
+    volumes:
+      - "/run/user/1000/podman/podman.sock:/var/run/docker.sock"
+    restart: unless-stopped
+
+  principles:
+    image: principles:latest
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.principles.entrypoints=web"
+      - "traefik.http.routers.principles.rule=Host(`principles.docker.localhost`)"
+      - "traefik.http.services.principles.loadbalancer.server.port=5001"
