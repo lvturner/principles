@@ -23,5 +23,5 @@ services:
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.principles.entrypoints=web"
-      - "traefik.http.routers.principles.rule=Host(`principles.docker.localhost`)"
+      - "traefik.http.routers.principles.rule=Host(`principles.makestuff.blog`)"
       - "traefik.http.services.principles.loadbalancer.server.port=5001"
