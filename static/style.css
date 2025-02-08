@@ -11,9 +11,10 @@ body {
 }
 
 .container {
-    max-width: 60%;
+    max-width: 60%; /* Keeps it responsive */
+    min-width: 60%; /* Prevents shrinking too much */
     margin: auto;
-    min-height: 700px; /* Set a fixed minimum height */
+    min-height: 700px; /* Ensures vertical space */
     display: flex;
     flex-direction: column;
     justify-content: center; /* Centers content vertically */
@@ -28,7 +29,8 @@ body {
     padding: 20px;
     border-radius: 6px;
     background-color: #1a1a1a;
-    flex-grow: 1; /* Makes sure it fills available height */
+    flex-grow: 1; /* Ensures it fills available height */
+    width: 100%; /* Ensures it stretches fully */
 }
 
 .left-section {
@@ -36,7 +38,7 @@ body {
     padding-right: 20px;
     display: flex;
     flex-direction: column;
-    /* justify-content: center; /* Centers text vertically */
+    align-items: flex-start; /* Aligns text to the top-left */
 }
 
 .title {
@@ -56,6 +58,7 @@ body {
     background-color: #d3d3d3;
     min-height: 100%; /* Ensures the divider takes full height */
     margin: 0 20px;
+    flex-shrink: 0;
 }
 
 .description {
@@ -65,7 +68,9 @@ body {
     padding-left: 20px;
     display: flex;
     flex-direction: column;
-    /* align-items: center; /* Centers text vertically */
+    min-width: 50%; /* Ensures it does not shrink too much */
+    flex-grow: 1; /* Ensures it expands properly */
+    align-items: flex-start;
 }
 .navigation {
     margin-top: 20px;
@@ -98,23 +103,28 @@ a:hover {
     text-decoration: underline;
 }
 
-.categories ul {
+ul {
     list-style-type: none; /* Remove default bullets */
     padding: 0; /* Remove default padding */
     margin: 0; /* Remove default margin */
 }
 
-.categories li {
+li {
     margin: 5px 0; /* Add some space between list items */
     position: relative; /* Position relative for the pseudo-element */
     padding-left: 10px; /* Add padding to make space for the custom marker */
 }
 
-.categories li::before {
+li::before {
     content: '-'; /* Custom marker */
     /* color: #007BFF; /* Marker color */
     position: absolute; /* Position absolute for the marker */
     left: 0; /* Position marker to the left */
     top: 0; /* Align marker with the text */
     /* font-size: 1.2em; /* Increase marker size */
+}
+
+.description h1 {
+    margin-top: 0px;
+    padding-top: 0px;
 }

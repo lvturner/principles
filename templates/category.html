@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{.CurrentCategory.Name}} - Principles</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="principle">
+            <!-- Left Side: Categories Navigation -->
+            <div class="left-section">
+                <h1 class="title">Principles</h1>
+                <div class="category">Some thoughts, guidelines and cliches to help make decisions in life and work.</div>
+                <br />
+                <hr />
+                <div class="categories">
+                    <ul>
+                        {{range .Categories}}
+                            <li><a href="/category?id={{.ID}}">{{.Name}}</a></li>
+                        {{end}}
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Visible Divider -->
+            <div class="divider"></div>
+
+            <!-- Right Side: Principles List -->
+            <div class="description">
+                <h1>{{.CurrentCategory.Name}}</h1>
+                <ul>
+                    {{range .Principles}}
+                        <li>
+                            <a href="/principle?id={{.ID}}">{{.Title}}</a>
+                            <p>{{.Description}}</p>
+                        </li>
+                    {{end}}
+                </ul>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
