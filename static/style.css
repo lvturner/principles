@@ -1,0 +1,120 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #121212;
+    color: #d3d3d3;
+    text-align: center;
+    margin: 0;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh; /* Ensures body takes full viewport height */
+}
+
+.container {
+    max-width: 60%;
+    margin: auto;
+    min-height: 700px; /* Set a fixed minimum height */
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Centers content vertically */
+}
+
+.principle {
+    display: flex;
+    align-items: stretch; /* Ensures sections stretch equally */
+    justify-content: center;
+    text-align: left;
+    border: 1px solid #444;
+    padding: 20px;
+    border-radius: 6px;
+    background-color: #1a1a1a;
+    flex-grow: 1; /* Makes sure it fills available height */
+}
+
+.left-section {
+    flex: 1;
+    padding-right: 20px;
+    display: flex;
+    flex-direction: column;
+    /* justify-content: center; /* Centers text vertically */
+}
+
+.title {
+    font-size: 2em;
+    font-weight: bold;
+    margin: 0;
+}
+
+.category {
+    font-size: 0.9em;
+    color: #b0b0b0;
+    margin-top: 5px;
+}
+
+.divider {
+    width: 2px;
+    background-color: #d3d3d3;
+    min-height: 100%; /* Ensures the divider takes full height */
+    margin: 0 20px;
+}
+
+.description {
+    flex: 2;
+    font-size: 1em;
+    color: #d3d3d3;
+    padding-left: 20px;
+    display: flex;
+    flex-direction: column;
+    /* align-items: center; /* Centers text vertically */
+}
+.navigation {
+    margin-top: 20px;
+}
+
+.navigation a {
+    margin: 0 10px;
+}
+
+.categories {
+    margin-top: 25px;
+}
+
+a.disabled {
+    color: #777;
+    pointer-events: none;
+    text-decoration: none;
+}
+
+a {
+    text-decoration: none;
+    color: #4dd0e1;
+    font-weight: bold;
+    transition: color 0.3s ease, text-decoration 0.3s ease;
+}
+
+a:hover {
+    color: #f4c542;
+    /* Warm gold on hover for contrast */
+    text-decoration: underline;
+}
+
+.categories ul {
+    list-style-type: none; /* Remove default bullets */
+    padding: 0; /* Remove default padding */
+    margin: 0; /* Remove default margin */
+}
+
+.categories li {
+    margin: 5px 0; /* Add some space between list items */
+    position: relative; /* Position relative for the pseudo-element */
+    padding-left: 10px; /* Add padding to make space for the custom marker */
+}
+
+.categories li::before {
+    content: '-'; /* Custom marker */
+    /* color: #007BFF; /* Marker color */
+    position: absolute; /* Position absolute for the marker */
+    left: 0; /* Position marker to the left */
+    top: 0; /* Align marker with the text */
+    /* font-size: 1.2em; /* Increase marker size */
+}

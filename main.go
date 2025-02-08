@@ -20,14 +20,12 @@ type Principle struct {
 	NextID      int // Next principle ID
 }
 
-func main() {
+func handlePrinciple(w http.ResponseWriter, r *http.Request) {
 	// Load the template
 	tmpl := template.Must(template.ParseFiles("templates/principle.html"))
-
-	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
 		// Connect to SQLite database
 		db, err := sql.Open("sqlite", "./principles.db")
-		if err != nil {
+		if (err != nil) {
 			http.Error(w, "Database connection error", http.StatusInternalServerError)
 			return
 		}
@@ -81,9 +79,22 @@ func main() {
 
 		// Render the template
 		tmpl.Execute(w, principle)
-	})
+}
+
+func handleRoot(w http.ResponseWriter, r *http.Request) {
+	http.ServeFile(w, r, "templates/index.html")
+}
+
+func handleCss(w http.ResponseWriter, r *http.Request) {
+	http.ServeFile(w, r, "static/style.css")
+}
+
+func main() {
+	http.HandleFunc("/", handleRoot)
+	http.HandleFunc("/style.css", handleCss)
+	http.HandleFunc("/principle", handlePrinciple) 
 
 	// Start the HTTP server
 	log.Println("Server running at http://localhost:5001/")
-	log.Fatal(http.ListenAndServe(":5001", nil))
+	log.Fatal(http.ListenAndServe(":5002", nil))
 }
