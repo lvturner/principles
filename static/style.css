@@ -8,6 +8,7 @@ body {
     display: flex;
     flex-direction: column;
     min-height: 100vh; /* Ensures body takes full viewport height */
+    box-sizing: border-box; /* Include padding and border in element's total width and height */
 }
 
 .container {
@@ -18,6 +19,7 @@ body {
     display: flex;
     flex-direction: column;
     justify-content: center; /* Centers content vertically */
+    box-sizing: border-box; /* Include padding and border in element's total width and height */
 }
 
 .principle {
@@ -31,6 +33,7 @@ body {
     background-color: #1a1a1a;
     flex-grow: 1; /* Ensures it fills available height */
     width: 100%; /* Ensures it stretches fully */
+    box-sizing: border-box; /* Include padding and border in element's total width and height */
 }
 
 .left-section {
@@ -39,6 +42,7 @@ body {
     display: flex;
     flex-direction: column;
     align-items: flex-start; /* Aligns text to the top-left */
+    box-sizing: border-box; /* Include padding and border in element's total width and height */
 }
 
 .title {
@@ -51,6 +55,30 @@ body {
     font-size: 0.9em;
     color: #b0b0b0;
     margin-top: 5px;
+}
+
+/* Media query for mobile screens */
+@media (max-width: 768px) {
+    .container {
+        max-width: 80%; /* Keeps it responsive */
+        min-width: 80%; /* Prevents shrinking too much */
+    }
+    .principle {
+        flex-direction: column; /* Stack sections vertically */
+    }
+
+    .left-section, .description {
+        width: 100%; /* Ensure full width for both sections */
+        padding-right: 0; /* Remove right padding */
+    }
+
+    .left-section {
+        margin-bottom: 20px; /* Add space between sections */
+    }
+
+    .description {
+        padding: 0 20px; /* Add padding to both left and right */
+    }
 }
 
 .divider {
@@ -71,7 +99,9 @@ body {
     min-width: 50%; /* Ensures it does not shrink too much */
     flex-grow: 1; /* Ensures it expands properly */
     align-items: flex-start;
+    box-sizing: border-box; /* Include padding and border in element's total width and height */
 }
+
 .navigation {
     margin-top: 20px;
 }
@@ -98,8 +128,7 @@ a {
 }
 
 a:hover {
-    color: #f4c542;
-    /* Warm gold on hover for contrast */
+    color: #f4c542; /* Warm gold on hover for contrast */
     text-decoration: underline;
 }
 
@@ -117,11 +146,9 @@ li {
 
 li::before {
     content: '-'; /* Custom marker */
-    /* color: #007BFF; /* Marker color */
     position: absolute; /* Position absolute for the marker */
     left: 0; /* Position marker to the left */
     top: 0; /* Align marker with the text */
-    /* font-size: 1.2em; /* Increase marker size */
 }
 
 .description h1 {
