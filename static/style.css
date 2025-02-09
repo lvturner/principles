@@ -60,8 +60,8 @@ body {
 /* Media query for mobile screens */
 @media (max-width: 768px) {
     .container {
-        max-width: 80%; /* Keeps it responsive */
-        min-width: 80%; /* Prevents shrinking too much */
+        max-width: 95%; /* Keeps it responsive */
+        min-width: 95%; /* Prevents shrinking too much */
     }
     .principle {
         flex-direction: column; /* Stack sections vertically */
