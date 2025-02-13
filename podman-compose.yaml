@@ -3,6 +3,8 @@ version: '3'
 entryPoints:
   web:
     address: :9080
+  websecure:
+    address: :4443
 
 services:
   reverse-proxy:
@@ -11,10 +13,16 @@ services:
       - "--api.insecure=true"
       - "--providers.docker=true"
       - "--entrypoints.web.address=:9080"
+      - "--entrypoints.websecure.address=:4443"
+      - "--certificatesresolvers.myresolver.acme.tlschallenge=true"
+      - "--certificatesresolvers.myresolver.acme.email=lvturner@hey.com"
+      - "--certificatesresolvers.myresolver.acme.storage=/letsencrypt/acme.json"
     ports:
       - "8080:8080"
       - "9080:9080"
+      - "4443:4443"
     volumes:
+      - "./letsencrypt:/letsencrypt"
       - "/run/user/1000/podman/podman.sock:/var/run/docker.sock"
     restart: unless-stopped
 
@@ -22,6 +30,7 @@ services:
     image: principles:latest
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.principles.entrypoints=web"
       - "traefik.http.routers.principles.rule=Host(`principles.makestuff.blog`)"
+      - "traefik.http.routers.principles.entrypoints=websecure"
+      - "traefik.http.routers.principles.tls.certresolver=myresolver"
       - "traefik.http.services.principles.loadbalancer.server.port=5001"
