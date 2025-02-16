@@ -11,17 +11,11 @@
         <div class="principle">
             <div class="left-section">
                 <h1 class="title">{{.Title}}</h1>
-                <div class="category">{{.Category}}</div>
-                <p>{{.Description}}</p>
-                {{if .PrevID}}
-                    <a href="/principle?id={{.PrevID}}">Previous</a>
-                {{end}}
-                {{if .NextID}}
-                    <a href="/principle?id={{.NextID}}">Next</a>
-                {{end}}
+                <div class="category">Category: <a href="/category?id={{.CategoryId}}">{{.Category}}</a></div>
             </div>
             <div class="divider"></div>
             <div class="description">
+                <p>{{.Description}}</p>
                 <h2>Linked Principles</h2>
                 <ul>
                     {{range .LinkedPrinciples}}
@@ -29,6 +23,19 @@
                     {{end}}
                 </ul>
             </div>
+        </div>
+        <div class="navigation">
+            {{if ne .PrevID 0}}
+                <a href="/principle?id={{.PrevID}}">Previous</a>
+            {{else}}
+                <a class="disabled">Previous</a>
+            {{end}}
+                <a href="/">Home</a>
+            {{if ne .NextID 0}}
+                <a href="/principle?id={{.NextID}}">Next</a>
+            {{else}}
+                <a class="disabled">Next</a>
+            {{end}}
         </div>
     </div>
 </body>
