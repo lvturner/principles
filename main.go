@@ -19,7 +19,7 @@ type Category struct {
 type Principle struct {
 	ID               int
 	Title            string
-	Description      string
+	Description      template.HTML
 	Category         string
 	CategoryId       int
 	PrevID           int         // Previous principle ID
