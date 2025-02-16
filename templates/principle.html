@@ -12,16 +12,16 @@
             <div class="left-section">
                 <h1 class="title">{{.Title}}</h1>
                 <div class="category">Category: <a href="/category?id={{.CategoryId}}">{{.Category}}</a></div>
-            </div>
-            <div class="divider"></div>
-            <div class="description">
-                <p>{{.Description}}</p>
-                <h2>Linked Principles</h2>
+                <h3>Linked Principles</h3>
                 <ul>
                     {{range .LinkedPrinciples}}
                         <li><a href="/principle?id={{.ID}}">{{.Title}}</a></li>
                     {{end}}
                 </ul>
+            </div>
+            <div class="divider"></div>
+            <div class="description">
+                <p>{{.Description}}</p>
             </div>
         </div>
         <div class="navigation">
