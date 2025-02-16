@@ -77,12 +77,18 @@ func handlePrinciple(w http.ResponseWriter, r *http.Request) {
 
 	// Fetch linked principles
 	rows, err := db.Query(`
-        SELECT p.id, p.title, p.description, IFNULL(c.name, 'Uncategorized'), c.id AS category
-        FROM principles p
-        LEFT JOIN categories c ON p.category_id = c.id
-        INNER JOIN principle_links pl ON p.id = pl.related_id
-        WHERE pl.principle_id = ?
-    `, principle.ID)
+		SELECT p.id, p.title, p.description, IFNULL(c.name, 'Uncategorized'), c.id AS category
+		FROM principles p
+		LEFT JOIN categories c ON p.category_id = c.id
+		INNER JOIN principle_links pl ON p.id = pl.related_id
+		WHERE pl.principle_id = ?
+		UNION
+		SELECT p.id, p.title, p.description, IFNULL(c.name, 'Uncategorized'), c.id AS category
+		FROM principles p
+		LEFT JOIN categories c ON p.category_id = c.id
+		INNER JOIN principle_links pl ON p.id = pl.principle_id
+		WHERE pl.related_id = ?
+	`, principle.ID, principle.ID)
 	if err != nil {
 		http.Error(w, "Database query error: "+err.Error(), http.StatusInternalServerError)
 		return
