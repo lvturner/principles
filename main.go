@@ -17,13 +17,14 @@ type Category struct {
 
 // Principle represents a principle with title, description, and category
 type Principle struct {
-	ID          int
-	Title       string
-	Description string
-	Category    string
-	CategoryId  sql.NullInt64
-	PrevID      int // Previous principle ID
-	NextID      int // Next principle ID
+	ID               int
+	Title            string
+	Description      string
+	Category         string
+	CategoryId       sql.NullInt64
+	PrevID           int         // Previous principle ID
+	NextID           int         // Next principle ID
+	LinkedPrinciples []Principle // Linked principles
 }
 
 func handlePrinciple(w http.ResponseWriter, r *http.Request) {
@@ -73,6 +74,31 @@ func handlePrinciple(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, "Database query error: "+err.Error(), http.StatusInternalServerError)
 		return
 	}
+
+	// Fetch linked principles
+	rows, err := db.Query(`
+        SELECT p.id, p.title, p.description, IFNULL(c.name, 'Uncategorized'), c.id AS category
+        FROM principles p
+        LEFT JOIN categories c ON p.category_id = c.id
+        INNER JOIN principle_links pl ON p.id = pl.related_id
+        WHERE pl.principle_id = ?
+    `, principle.ID)
+	if err != nil {
+		http.Error(w, "Database query error: "+err.Error(), http.StatusInternalServerError)
+		return
+	}
+	defer rows.Close()
+
+	var linkedPrinciples []Principle
+	for rows.Next() {
+		var linkedPrinciple Principle
+		if err := rows.Scan(&linkedPrinciple.ID, &linkedPrinciple.Title, &linkedPrinciple.Description, &linkedPrinciple.Category, &linkedPrinciple.CategoryId); err != nil {
+			http.Error(w, "Database scan error: "+err.Error(), http.StatusInternalServerError)
+			return
+		}
+		linkedPrinciples = append(linkedPrinciples, linkedPrinciple)
+	}
+	principle.LinkedPrinciples = linkedPrinciples
 
 	// Calculate Previous and Next IDs
 	// Fetch the previous principle ID

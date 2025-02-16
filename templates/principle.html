@@ -3,38 +3,32 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Principle</title>
-    <link rel="stylesheet" href="style.css">
+    <title>{{.Title}}</title>
+    <link rel="stylesheet" href="/style.css">
 </head>
 <body>
     <div class="container">
         <div class="principle">
-            <!-- Left Side: Title & Category -->
             <div class="left-section">
                 <h1 class="title">{{.Title}}</h1>
-                <div class="category">Category: <a href="/category?id={{.CategoryId}}">{{.Category}}</a></div>
+                <div class="category">{{.Category}}</div>
+                <p>{{.Description}}</p>
+                {{if .PrevID}}
+                    <a href="/principle?id={{.PrevID}}">Previous</a>
+                {{end}}
+                {{if .NextID}}
+                    <a href="/principle?id={{.NextID}}">Next</a>
+                {{end}}
             </div>
-
-            <!-- Visible Divider -->
             <div class="divider"></div>
-
-            <!-- Right Side: Description -->
             <div class="description">
-                {{.Description}}
+                <h2>Linked Principles</h2>
+                <ul>
+                    {{range .LinkedPrinciples}}
+                        <li><a href="/principle?id={{.ID}}">{{.Title}}</a></li>
+                    {{end}}
+                </ul>
             </div>
-        </div>
-        <div class="navigation">
-            {{if ne .PrevID 0}}
-                <a href="/principle?id={{.PrevID}}">Previous</a>
-            {{else}}
-                <a class="disabled">Previous</a>
-            {{end}}
-                <a href="/">Home</a>
-            {{if ne .NextID 0}}
-                <a href="/principle?id={{.NextID}}">Next</a>
-            {{else}}
-                <a class="disabled">Next</a>
-            {{end}}
         </div>
     </div>
 </body>
