@@ -1,23 +1,29 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{.Title}}</title>
     <link rel="stylesheet" href="/style.css">
 </head>
+
 <body>
     <div class="container">
         <div class="principle">
             <div class="left-section">
                 <h1 class="title">{{.Title}}</h1>
                 <div class="category">Category: <a href="/category?id={{.CategoryId}}">{{.Category}}</a></div>
+                {{if gt (len .LinkedPrinciples) 0}}
+                <p>
                 <h3>Linked Principles</h3>
                 <ul>
                     {{range .LinkedPrinciples}}
-                        <li><a href="/principle?id={{.ID}}">{{.Title}}</a></li>
+                    <li><a href="/principle?id={{.ID}}">{{.Title}}</a></li>
                     {{end}}
                 </ul>
+                </p>
+                {{end}}
             </div>
             <div class="divider"></div>
             <div class="description">
@@ -26,17 +32,18 @@
         </div>
         <div class="navigation">
             {{if ne .PrevID 0}}
-                <a href="/principle?id={{.PrevID}}">Previous</a>
+            <a href="/principle?id={{.PrevID}}">Previous</a>
             {{else}}
-                <a class="disabled">Previous</a>
+            <a class="disabled">Previous</a>
             {{end}}
-                <a href="/">Home</a>
+            <a href="/">Home</a>
             {{if ne .NextID 0}}
-                <a href="/principle?id={{.NextID}}">Next</a>
+            <a href="/principle?id={{.NextID}}">Next</a>
             {{else}}
-                <a class="disabled">Next</a>
+            <a class="disabled">Next</a>
             {{end}}
         </div>
     </div>
 </body>
+
 </html>

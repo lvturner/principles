@@ -21,7 +21,7 @@ type Principle struct {
 	Title            string
 	Description      string
 	Category         string
-	CategoryId       sql.NullInt64
+	CategoryId       int
 	PrevID           int         // Previous principle ID
 	NextID           int         // Next principle ID
 	LinkedPrinciples []Principle // Linked principles
