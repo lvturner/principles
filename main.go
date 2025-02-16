@@ -15,6 +15,12 @@ type Category struct {
 	Name string
 }
 
+type Reference struct {
+	PrincipleID int
+	Title       string
+	URL         string
+}
+
 // Principle represents a principle with title, description, and category
 type Principle struct {
 	ID               int
@@ -25,6 +31,7 @@ type Principle struct {
 	PrevID           int         // Previous principle ID
 	NextID           int         // Next principle ID
 	LinkedPrinciples []Principle // Linked principles
+	References       []Reference
 }
 
 func handlePrinciple(w http.ResponseWriter, r *http.Request) {
@@ -105,6 +112,21 @@ func handlePrinciple(w http.ResponseWriter, r *http.Request) {
 		linkedPrinciples = append(linkedPrinciples, linkedPrinciple)
 	}
 	principle.LinkedPrinciples = linkedPrinciples
+
+	rows, err = db.Query(`SELECT title, url FROM refs WHERE principle_id = ?`, principle.ID)
+	if err != nil {
+		http.Error(w, "Database query error: "+err.Error(), http.StatusInternalServerError)
+		return
+	}
+	defer rows.Close()
+	for rows.Next() {
+		var reference Reference
+		if err := rows.Scan(&reference.Title, &reference.URL); err != nil {
+			http.Error(w, "Database scan error: "+err.Error(), http.StatusInternalServerError)
+			return
+		}
+		principle.References = append(principle.References, reference)
+	}
 
 	// Calculate Previous and Next IDs
 	// Fetch the previous principle ID
