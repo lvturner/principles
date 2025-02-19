@@ -16,7 +16,7 @@
                 <div class="category">Category: <a href="/category?id={{.CategoryId}}">{{.Category}}</a></div>
                 {{if gt (len .LinkedPrinciples) 0}}
                 <p>
-                <br />
+                    <br />
                 <h3>Linked Principles</h3>
                 <ul>
                     {{range .LinkedPrinciples}}
@@ -34,11 +34,11 @@
                 <div class="references">
                     <h3>References</h3>
                     <ul>
-                    {{range .References}}
+                        {{range .References}}
                         <li><a href="{{.URL}}">{{.Title}}</li>
-                    {{end}}
+                        {{end}}
                     </ul>
-                    
+
                 </div>
                 {{end}}
             </div>
@@ -57,6 +57,9 @@
             {{end}}
         </div>
     </div>
+    <!-- Cloudflare Web Analytics -->
+    <script defer src='https://static.cloudflareinsights.com/beacon.min.js'
+        data-cf-beacon='{"token": "2440d7eefcb846159b1cc6946393339f"}'></script><!-- End Cloudflare Web Analytics -->
 </body>
 
 </html>
